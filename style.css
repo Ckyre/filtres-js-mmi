@@ -1,0 +1,111 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap');
+
+body {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+}
+
+/* CAMERA */
+.container {
+    padding: 200px 300px;
+    background: rgb(19,40,190);
+    background: -moz-linear-gradient(347deg, rgba(19,40,190,1) 0%, rgba(22,51,255,1) 100%);
+    background: -webkit-linear-gradient(347deg, rgba(19,40,190,1) 0%, rgba(22,51,255,1) 100%);
+    background: linear-gradient(347deg, rgba(19,40,190,1) 0%, rgba(22,51,255,1) 100%);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+#canvas {
+    display: none;
+}
+
+#shot-btn {
+    position: fixed;
+    bottom: 40px;
+    right: 40px;
+    background-color: transparent;
+    border: solid 10px #e6e6e6;
+    border-radius: 20px;
+    box-shadow: 2px 3px 0px #00000057;
+    cursor: pointer;
+    padding: 0;
+    background-color: #e6e6e6;
+}
+
+#video {
+    border-radius: 20px;
+}
+
+/* PRESENTATION */
+.presentation {
+    background-color: white;
+    padding: 200px 0 0 300px;
+}
+
+.presentation h1 {
+    font-size: 56px;
+}
+
+/* FILTRES */
+.flex {
+    display: flex;
+    justify-content: space-between;
+    margin: 50px auto 0 auto;
+    background-color: white;
+    border-radius: 20px;
+    padding: 40px 100px;
+}
+
+.flex .content {
+    padding-right: 50px;
+}
+
+.flex canvas {
+    width: 260px !important;
+}
+
+.flex h2 {
+    margin: 0;
+    font-weight: bold;
+    font-size: 46px;
+    line-height: 50px;
+}
+
+.flex h2 span {
+    font-size: 14px;
+    font-weight: normal;
+}
+
+.flex img {
+    border-radius: 20px;
+    height: 200px;
+}
+
+.flex p {
+    margin-bottom: 40px;
+}
+
+.flex button {
+    padding: 10px;
+    border-radius: 5px;
+    color: white;
+    background-color: rgb(48, 68, 219);
+    border: none;
+    cursor: pointer;
+    font-family: "Poppins", sans-serif;
+    font-size: 18px;
+}
+
+.actions {
+    display: flex;
+    align-items: center;
+}
+
+.actions button, .actions label {
+    margin-right: 20px;
+}
+
+.actions input {
+    margin-right: 10px;
+}

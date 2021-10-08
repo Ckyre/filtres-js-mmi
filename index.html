@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Gabriel ROULEAU</title>
+    <link rel="stylesheet" href="style.css">
+    
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js'></script>
+    <script src="capture.js" defer></script>
+    <script src="filtres.js" defer></script>
+</head>
+<body>
+    <div class="presentation">
+        <h1>Filtres JS de Gabriel ROULEAU</h1>
+    </div>
+
+    <div class="container">
+        <!-- CAMERA -->
+        <button id="shot-btn"><video id="video"></video></button>
+        <canvas id="canvas"></canvas>
+
+        <!-- FILTERS -->
+        <div class="flex">
+            <div class="content">
+                <h2>Réhaussement de contraste <span>(via égalisation)</span></h2>
+                <p>Afin de réhausser le contraste il faut d'abord créer un histogramme pour chaque
+                    composantes. Il est alors possible d'applatir l'histogramme de facon linéaire 
+                    mais j'ai choisi d'appliquer une égalisation d'histogramme. Pour cela j'ai
+                    créé un histogramme cumulé pour chaque composantes puis j'ai multiplié la valeur
+                    cumulée par 255 pour les trois comosantes RGB de chaque pixels. Histogramme affiché avec Chart.js
+                </p>
+                <div class="actions">
+                    <button onclick="FiltreContraste()">Activer le filtre</button>
+                    <input type="range" name="contrast" id="contrast-level" min="100" max="255" value="255" step="1">
+                    <label for="contrast">Contraste</label>
+                </div>
+            </div>
+            <div>
+                <img src="http://placekitten.com/g/320/261" id="contraste-img" alt="photo">
+                <canvas id="histogram" width="400" height="400"></canvas>
+            </div>
+        </div>
+
+        <div class="flex">
+            <div class="content">
+                <h2>Pixelisation</h2>
+                <p>Pour pixeliser l'image j'ai simplement colorié les X pixels entourant le pixel cible
+                    de la même couleur que ce pixel.
+                </p>
+                <div class="actions">
+                    <button onclick="FiltrePixelisation()">Activer le filtre</button>
+                    <input type="range" name="pixel" id="pixel-factor" min="2" max="15" value="4" step="1">
+                    <label for="pixel">Pixelisation</label>
+                </div>
+            </div>
+            <img src="http://placekitten.com/g/320/261" id="pixelisation-img" alt="photo">
+        </div>
+
+        <div class="flex">
+            <div class="content">
+                <h2>Négatif</h2>
+                <p>Le filtre négatif est simplement une inversion des valeurs pour 
+                    chaque composantes. Sois 255 moins la valeur du composant.
+                </p>
+                <button onclick="FiltreNegatif()">Activer le filtre</button>
+
+            </div>
+            <img src="http://placekitten.com/g/320/261" id="negatif-img" alt="photo">
+        </div>
+
+        <div class="flex">
+            <div class="content">
+                <h2>Binarisation</h2>
+                <p>Pour binariser les nuances d'une image il faut faire la moyenne de
+                   des composantes pour chaques pixel et replacer les pixel ayant une moyenne
+                   suppérieure a 128 par du blanc et ceux inférieur a 128 par du noir.
+                </p>
+                <div class="actions">
+                    <button onclick="FiltreBinarisation()">Activer le filtre</button>
+                    <input type="checkbox" id="inverse-input" name="inverse">
+                    <label for="inverse">Inverser</label>
+                </div>
+            </div>
+            <img src="http://placekitten.com/g/320/261" id="binarisation-img" alt="photo">
+        </div>
+
+        <div class="flex">
+            <div class="content">
+                <h2>Mirroir</h2>
+                <p>L'effet mirroir se fait simplement en continuant d'utiliser les pixel
+                     de position x inférrieure a la moitié de l'image lorsque le pixel cible
+                     est supérrieur a la moitié de l'image.
+                </p>
+                <div class="actions">
+                    <button onclick="FiltreMirroir()">Activer le filtre</button>
+                    <input type="range" name="middle" id="middle-input" min="0" max="100" value="50" step="1">
+                    <label for="middle">Décalage</label>
+                </div>
+            </div>
+            <img src="http://placekitten.com/g/320/261" id="mirroir-img" alt="photo">
+        </div>
+
+        <div class="flex">
+            <div class="content">
+                <h2>Nuances de gris</h2>
+                <p>Convertir une image en couleur vers une image en nuances de gris se fait en
+                     éffectuant la moyenne de chaque composantes pour chaque pixels. Puis en remplacant
+                     la valeur de ces composantes par la moyenne calculée.
+                </p>
+                <button onclick="FiltreGris()">Activer le filtre</button>
+            </div>
+            <img src="http://placekitten.com/g/320/261" id="gris-img" alt="photo">
+        </div>
+
+        <div class="flex">
+            <div class="content">
+                <h2>Teinture</h2>
+                <p>Appliquer un filtre sur une image se fait via l'interpolation des couleurs de l'image
+                     avec les couleurs du filtre. Une interpolation linéaire se fait via : <strong>a + (b -a ) * x</strong>
+                      avec 'a' la couleur de l'image, b la couleur du filtre et x le coefficient de l'interpolation.
+                </p>
+                <div class="actions">
+                    <button onclick="FiltreTeinture()">Activer le filtre</button>
+                    <input type="range" name="teinture" id="teinture-input" max="100" min="0" value="50">
+                    <label for="teinture">Transparence</label>
+                </div>
+            </div>
+            <img src="http://placekitten.com/g/320/261" id="teinture-img" alt="photo">
+        </div>
+
+    </div>
+</body>
+</html>
